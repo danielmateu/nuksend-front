@@ -1,6 +1,6 @@
 import { clienteAxios } from 'config/axios';
 import { useReducer } from 'react';
-import { REGISTRO_EXITOSO, USUARIO_AUTENTICADO } from 'types';
+import { REGISTRO_ERROR, REGISTRO_EXITOSO, USUARIO_AUTENTICADO } from 'types';
 import authContext from './authContex';
 import authReducer from './authReducer';
 
@@ -32,6 +32,10 @@ const AuthState = ({ children }) => {
             })
         } catch (error) {
             console.log(error.response.data.msg);
+            dispatch({
+                type: REGISTRO_ERROR,
+                payload: error.response.data.msg
+            })
         }
     }
 
