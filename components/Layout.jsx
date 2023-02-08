@@ -13,14 +13,14 @@ export const Layout = ({children}) => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <body className="bg-gray-100 min-h-screen">
+            <div className="bg-gray-100 min-h-screen">
                 <div className="container mx-auto">
                     <Header/>
                     <main className="p-4">
                         {children}
                     </main>
                 </div>
-            </body>
+            </div>
         </>
 
     )
