@@ -1,5 +1,6 @@
-import React, { useReducer, } from 'react';
-import { authContext, authReducer } from './';
+import { useReducer } from 'react';
+import authContext from './authContex';
+import authReducer from './authReducer';
 
 
 const AuthState = ({ children }) => {
@@ -12,7 +13,7 @@ const AuthState = ({ children }) => {
         mensaje: null
     };
 
-    //Definir state
+    //Definir el reducer
     const [state, dispatch] = useReducer(authReducer, initialState)
 
     return (
