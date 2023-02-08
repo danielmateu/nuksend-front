@@ -2,6 +2,7 @@ import { Layout } from 'components/Layout'
 
 
 const CrearCuenta = () => {
+    
     return (
         <Layout>
             <div className="md:w-4/5  xl:w-3/5 mx-auto mb-32">

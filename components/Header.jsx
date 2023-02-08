@@ -1,28 +1,14 @@
 import Link from 'next/link'
-import { useRouter } from 'next/router'
-import React, { useEffect } from 'react'
 
 export const Header = () => {
 
-    const router = useRouter()
-    const redireccionar = () => {
-        router.push('/')
-    }
-
-    useEffect(() => {
-        redireccionar()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
-    
-
-    
 
     return (
         <header className='flex flex-col sm:flex-row items-center justify-between p-10 '>
             <Link
             href='/'
             className='font-bold text-red-500  gap-1 text-2xl sm:text-4xl'
-            onClick={redireccionar}
+            
             >
                 NukSend <span className='text-gray-500 '>App</span>
             </Link>
