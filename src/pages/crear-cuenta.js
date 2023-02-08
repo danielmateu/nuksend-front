@@ -1,8 +1,18 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Layout } from 'components/Layout'
+import authContext from 'context/auth/authContex'
 import { useFormik } from 'formik'
+import { useContext, useEffect } from 'react'
 import * as Yup from 'yup'
 
 const CrearCuenta = () => {
+
+    //Acceder al state
+    const AuthContext = useContext(authContext)
+    const { registrarUsuario } = AuthContext;
+
+    
+    registrarUsuario()
 
     //Validación formulario con Formik y Yup
     const formik = useFormik({
