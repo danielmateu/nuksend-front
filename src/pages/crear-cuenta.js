@@ -11,8 +11,8 @@ const CrearCuenta = () => {
     const AuthContext = useContext(authContext)
     const { registrarUsuario } = AuthContext;
 
-    
-    registrarUsuario()
+
+
 
     //Validación formulario con Formik y Yup
     const formik = useFormik({
@@ -28,7 +28,7 @@ const CrearCuenta = () => {
             password: Yup.string().required('El password es obligatorio').min(6, 'El password debe ser de al menos 6 caracteres')
         }),
         onSubmit: valores => {
-            console.log(valores)
+            registrarUsuario(valores)
         }
     })
 
@@ -95,7 +95,7 @@ const CrearCuenta = () => {
                                     formik.touched.password && formik.errors.password ? (
                                         <div className="my-2 bg-red-100 border-l-4 border-red-500 text-red-700 p-4">
                                             <p className='font-semibold'>{formik.errors.password}</p>
-                                            
+
                                         </div>
                                     ) : null
                                 }
