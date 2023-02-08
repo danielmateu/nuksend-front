@@ -1,13 +1,17 @@
 import { clienteAxios } from 'config/axios';
 import { useReducer } from 'react';
-import { REGISTRO_ERROR, REGISTRO_EXITOSO, USUARIO_AUTENTICADO } from 'types';
+import {
+    REGISTRO_ERROR,
+    REGISTRO_EXITOSO,
+    LIMPIAR_ALERTA
+} from 'types';
 import authContext from './authContex';
 import authReducer from './authReducer';
 
 
 
 const AuthState = ({ children }) => {
-    
+
     //Estado inicial
     const initialState = {
         token: typeof window !== 'undefined' ? localStorage.getItem('token') : '',
@@ -22,7 +26,7 @@ const AuthState = ({ children }) => {
     //Registrar usuario
     const registrarUsuario = async datos => {
         // console.log('Desde registrar usuario');
-        console.log(datos);
+        // console.log(datos);
         try {
             const respuesta = await clienteAxios.post('/api/usuarios', datos);
             // console.log(respuesta.data.msg);
@@ -30,29 +34,32 @@ const AuthState = ({ children }) => {
                 type: REGISTRO_EXITOSO,
                 payload: respuesta.data.msg,
             })
+
+
         } catch (error) {
-            console.log(error.response.data.msg);
+            // console.log(error.response.data.msg);
             dispatch({
                 type: REGISTRO_ERROR,
                 payload: error.response.data.msg
             })
         }
+
+        //Limpiar alerta despues de 3 segundos
+        setTimeout(() => {
+            dispatch({
+                type: LIMPIAR_ALERTA
+            })
+        }, 3000)
     }
 
-    //USuario autenticado
-    // const usuarioAutenticado = nombre => {
-    //     dispatch({
-    //         type: USUARIO_AUTENTICADO,
-    //         payload: nombre
-    //     })
-    // }
+
 
     return (
         <authContext.Provider value={{
             ...state,
-            // usuarioAutenticado,
+
             registrarUsuario
-            
+
         }}>
             {children}
         </authContext.Provider>

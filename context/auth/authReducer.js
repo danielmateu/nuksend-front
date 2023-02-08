@@ -1,4 +1,8 @@
-import { REGISTRO_ERROR, REGISTRO_EXITOSO, USUARIO_AUTENTICADO } from "types"
+import { 
+    REGISTRO_ERROR, 
+    REGISTRO_EXITOSO,
+    LIMPIAR_ALERTA, 
+} from "types"
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default (state = initialState, action) => {
@@ -16,14 +20,11 @@ export default (state = initialState, action) => {
                 mensaje: action.payload
             }
 
-        // case USUARIO_AUTENTICADO:
-        //     return {
-        //         ...state,
-        //         usuario: action.payload,
-        //         autenticado: true
-        //     }
-
-
+        case LIMPIAR_ALERTA:
+            return{
+                ...state,
+                mensaje: null
+            }
 
         default:
             return state
