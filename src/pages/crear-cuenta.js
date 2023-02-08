@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { Alerta } from 'components/Alerta'
 import { Layout } from 'components/Layout'
 import authContext from 'context/auth/authContex'
 import { useFormik } from 'formik'
@@ -9,7 +10,7 @@ const CrearCuenta = () => {
 
     //Acceder al state
     const AuthContext = useContext(authContext)
-    const { registrarUsuario } = AuthContext;
+    const { mensaje, registrarUsuario } = AuthContext;
 
 
 
@@ -36,6 +37,8 @@ const CrearCuenta = () => {
         <Layout>
             <div className="md:w-4/5  xl:w-3/5 mx-auto mb-32">
                 <h2 className="text-4xl text-gray-500 text-center">Creación de Cuenta</h2>
+
+                
                 <div className="flex justify-center">
                     <div className="w-full max-w-lg">
                         <form
@@ -106,6 +109,7 @@ const CrearCuenta = () => {
                                 value='Crear Cuenta'
                                 className='w-full bg-green-200 hover:bg-green-300 transition-colors py-4 rounded my-2'
                             />
+                            {mensaje && <Alerta/>}
                         </form>
                     </div>
                 </div>
