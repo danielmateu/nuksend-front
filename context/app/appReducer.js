@@ -13,11 +13,17 @@ import {
 export default (state = initialState, action) => {
     switch (action.type) {
 
-        case SUBIR_ARCHIVO:
+        case MOSTRAR_ALERTA:
             return {
                 ...state,
-                cargando: true,
-                
+                mensaje_archivo: action.payload,
+
+            }
+
+        case LIMPIAR_ALERTA:
+            return {
+                ...state,
+                mensaje_archivo: null
             }
 
         default:

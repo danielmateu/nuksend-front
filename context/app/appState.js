@@ -24,7 +24,6 @@ const initialState = {
     password: '',
     autor: null,
     url: '',
-
 };
 
 
@@ -32,9 +31,24 @@ const AppState = ({ children }) => {
 
     const [state, dispatch] = useReducer(appReducer, initialState)
 
+    //Muestra una alerta    
+    const mostrarAlerta = msg => {
+        dispatch({
+            type: MOSTRAR_ALERTA,
+            payload: msg
+        })
+
+        setTimeout(() => {
+            dispatch({
+                type: LIMPIAR_ALERTA
+            })
+        }, 3000);
+    }
+
     return (
         <appContext.Provider value={{
-            ...state
+            ...state,
+            mostrarAlerta
         }}>
             {children}
         </appContext.Provider>

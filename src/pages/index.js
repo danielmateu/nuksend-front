@@ -1,19 +1,25 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 import { Inter } from '@next/font/google'
+import { Alerta } from 'components/Alerta'
 import { DropZone } from 'components/DropZone'
 import { Layout } from 'components/Layout'
+import appContext from 'context/app/appContext'
 import authContext from 'context/auth/authContex'
 import Link from 'next/link'
 import { useContext, useEffect, useState } from 'react'
 
-const inter = Inter({ subsets: ['latin'] })
+
 
 export default function Home() {
 
   //Extraer el usuario autenticado del LS
   const AuthContext = useContext(authContext);
   const { usuarioAutenticado } = AuthContext;  
+
+  //Extraer el mensaje de error de archivos
+  const AppContext = useContext(appContext);
+  const { mensaje_archivo } = AppContext;
 
   useEffect(() => {
     usuarioAutenticado()
@@ -24,6 +30,7 @@ export default function Home() {
     <>
       <Layout>
         <div className="md:w-4/5 xl:w-3/5 mx-auto">
+          {mensaje_archivo && <Alerta/>}
           <div className="lg:flex hover:shadow-lg p-4 bg-white rounded-lg py-10 transition-all">
             <DropZone/>
             <div className="md:flex-1 m-4 lg:mt-0">

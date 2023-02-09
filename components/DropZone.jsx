@@ -4,6 +4,7 @@ import { useDropzone } from 'react-dropzone'
 import { clienteAxios } from "config/axios";
 import authContext from "context/auth/authContex";
 import { Formulario } from "./Formulario";
+import appContext from "context/app/appContext";
 
 
 export const DropZone = () => {
@@ -12,27 +13,20 @@ export const DropZone = () => {
     const AuthContext = useContext(authContext);
     const { usuarioAutenticado } = AuthContext;
 
-    // const onDrop = useCallback(async (acceptedFiles) => {
-    //     console.log(acceptedFiles)
-    //     //Crear FormData
-    //     const formData = new FormData();
-    //     formData.append('archivo', acceptedFiles[0]);
+    const AppContext = useContext(appContext);
+    const { mostrarAlerta } = AppContext;
 
-    //     const resultado = await clienteAxios.post('/api/archivos', formData)
-    //     console.log(resultado.data);
 
-    // }, [])
-
-    const onDropAccepted = useCallback (async(acceptedFiles) => {
+    const onDropAccepted = useCallback(async (acceptedFiles) => {
         const formData = new FormData();
         formData.append('archivo', acceptedFiles[0]);
 
         const resultado = await clienteAxios.post('/api/archivos', formData)
         console.log(resultado.data);
-    },[])
+    }, [])
 
     const onDropRejected = () => {
-        console.log('Archivo demasiado grande')
+        mostrarAlerta('Parece que el archivo es demasiado grande, puedes crear una cuenta gratuita para incrementar el limite')
     }
 
     //Extraer contenido de dropzone
@@ -41,11 +35,12 @@ export const DropZone = () => {
         getRootProps,
         getInputProps,
         isDragActive
-    } = useDropzone({ 
+    } = useDropzone({
         // onDrop, 
-        onDropAccepted, 
-        onDropRejected, 
-        maxSize: 1000000 })
+        onDropAccepted,
+        onDropRejected,
+        maxSize: 1000000
+    })
 
     const archivos = acceptedFiles.map(archivo => (
         <li
@@ -59,7 +54,6 @@ export const DropZone = () => {
 
     //Crear enlace
     const crearEnlace = async () => {
-        
 
         console.log('desde crear enlace')
     }
@@ -75,15 +69,15 @@ export const DropZone = () => {
 
                 {
                     acceptedFiles.length > 0 ? (
-                        <div className = 'w-full p-4  flex flex-col justify-center gap-6'>
+                        <div className='w-full p-4  flex flex-col justify-center gap-6'>
                             <h4 className="text-center text-2xl tex-gray-400">Archivo cargado</h4>
                             <ul>
                                 {archivos}
                             </ul>
 
-                            <button 
-                            className="bg-gray-300 hover:bg-gray-400 px-10 hover:px-6 rounded py-2 my-6 hover:text-white transition-all"
-                            onClick={crearEnlace}
+                            <button
+                                className="bg-gray-300 hover:bg-gray-400 px-10 hover:px-6 rounded py-2 my-6 hover:text-white transition-all"
+                                onClick={crearEnlace}
                             >Crea el enlace</button>
                         </div>
 
@@ -97,8 +91,8 @@ export const DropZone = () => {
                                 <button className="bg-gray-300 hover:bg-gray-400 px-10 hover:px-6 rounded py-2 my-6 hover:text-white transition-all">Selecciona tu archivo</button>
                             </div>
                         </div>
-                            )
-                    }
+                    )
+                }
             </div>
         </div>
     )
