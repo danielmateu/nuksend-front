@@ -14,15 +14,17 @@ export const DropZone = () => {
     const { usuarioAutenticado } = AuthContext;
 
     const AppContext = useContext(appContext);
-    const { mostrarAlerta } = AppContext;
+    const { mostrarAlerta, subirArchivo, cargando } = AppContext;
 
 
     const onDropAccepted = useCallback(async (acceptedFiles) => {
+
         const formData = new FormData();
         formData.append('archivo', acceptedFiles[0]);
 
-        const resultado = await clienteAxios.post('/api/archivos', formData)
-        console.log(resultado.data);
+        subirArchivo(formData, acceptedFiles[0].path);
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const onDropRejected = () => {
@@ -75,10 +77,17 @@ export const DropZone = () => {
                                 {archivos}
                             </ul>
 
-                            <button
-                                className="bg-gray-300 hover:bg-gray-400 px-10 hover:px-6 rounded py-2 my-6 hover:text-white transition-all"
-                                onClick={crearEnlace}
-                            >Crea el enlace</button>
+                            {
+                                cargando ? <p className="text-center text-2xl text-gray-400">Subiendo archivo...</p> : (
+
+                                    <button
+                                        className="bg-gray-300 hover:bg-gray-400 px-10 hover:px-6 rounded py-2 my-6 hover:text-white transition-all"
+                                        onClick={crearEnlace}
+                                    >Crea el enlace
+                                    </button>
+                                )
+                            }
+
                         </div>
 
                     ) : (

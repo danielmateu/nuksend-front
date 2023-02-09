@@ -25,6 +25,33 @@ export default (state = initialState, action) => {
                 ...state,
                 mensaje_archivo: null
             }
+        
+        case SUBIR_ARCHIVO:
+            return {
+                ...state,
+                cargando: true,
+            }
+
+        case SUBIR_ARCHIVO:
+            return {
+                ...state,
+                cargando: true,
+            }
+        
+        case SUBIR_ARCHIVO_EXITO:
+            return {
+                ...state,
+                mensaje_archivo: 'Archivo subido correctamente',
+                cargando: false,
+                nombre: action.payload.nombre,
+                nombre_original: action.payload.nombre_original
+            }
+        case SUBIR_ARCHIVO_ERROR:
+            return {
+                ...state,
+                mensaje_archivo: 'Hubo un error al subir el archivo',
+                cargando: false,
+            }
 
         default:
             return state

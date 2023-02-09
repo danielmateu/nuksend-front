@@ -1,8 +1,8 @@
 import React, { useReducer } from 'react';
 import appContext from './appContext';
 import appReducer from './appReducer';
-
-import { 
+import { clienteAxios } from 'config/axios';
+import {
     AGREGAR_DESCARGAS,
     AGREGAR_PASSWORD,
     CREAR_ENLACE_ERROR,
@@ -11,7 +11,7 @@ import {
     MOSTRAR_ALERTA,
     SUBIR_ARCHIVO,
     SUBIR_ARCHIVO_ERROR,
-    SUBIR_ARCHIVO_EXITO 
+    SUBIR_ARCHIVO_EXITO
 } from 'types';
 
 
@@ -45,10 +45,43 @@ const AppState = ({ children }) => {
         }, 3000);
     }
 
+    //Sube los archivos al servidor
+    const subirArchivo = async (formData, nombreArchivo) => {
+
+        dispatch({
+            type: SUBIR_ARCHIVO,
+        })
+
+        // console.log('Subiendo archivo...');
+        try {
+            const resultado = await clienteAxios.post('/api/archivos', formData)
+            console.log(resultado.data);
+
+            dispatch({
+                type: SUBIR_ARCHIVO_EXITO,
+                payload: {
+                    nombre: resultado.data.archivo,
+                    nombre_original: nombreArchivo
+                }
+            })
+
+            return;
+            
+        } catch (error) {
+            console.log(error);
+            dispatch({
+                type: SUBIR_ARCHIVO_ERROR,
+                payload: error.response.data.msg,
+            })
+
+        }
+    }
+
     return (
         <appContext.Provider value={{
             ...state,
-            mostrarAlerta
+            mostrarAlerta,
+            subirArchivo,
         }}>
             {children}
         </appContext.Provider>
