@@ -14,7 +14,7 @@ export const DropZone = () => {
     const { usuarioAutenticado } = AuthContext;
 
     const AppContext = useContext(appContext);
-    const { mostrarAlerta, subirArchivo, cargando } = AppContext;
+    const { mostrarAlerta, subirArchivo, cargando, crearEnlace } = AppContext;
 
 
     const onDropAccepted = useCallback(async (acceptedFiles) => {
@@ -54,11 +54,6 @@ export const DropZone = () => {
         </li>
     ))
 
-    //Crear enlace
-    const crearEnlace = async () => {
-
-        console.log('desde crear enlace')
-    }
 
     return (
         <div className='flex md:flex-1 max-h-96 flex-col items-center justify-center border-dashed border-4 border-gray-500 hover:border-gray-600 bg-gray-100 rounded transition-all mx-4'>

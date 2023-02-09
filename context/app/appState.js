@@ -77,11 +77,39 @@ const AppState = ({ children }) => {
         }
     }
 
+    //Crea un enlace una vez que se subió el archivo
+    const crearEnlace = async () => {
+        const data = {
+            nombre: state.nombre,
+            nombre_original: state.nombre_original,
+            descargas: state.descargas,
+            password: state.password,
+            autor: state.autor
+        }
+
+        try {
+            const resultado = await clienteAxios.post('/api/enlaces', data);
+            // console.log(resultado.data.msg);
+            dispatch({
+                type: CREAR_ENLACE_EXITO,
+                payload: resultado.data.msg
+            })
+        } catch (error) {
+            // console.log(error);
+            dispatch({
+                type: CREAR_ENLACE_ERROR,
+                payload: error.response.data.msg,
+
+            })
+        }
+    }
+
     return (
         <appContext.Provider value={{
             ...state,
             mostrarAlerta,
             subirArchivo,
+            crearEnlace
         }}>
             {children}
         </appContext.Provider>

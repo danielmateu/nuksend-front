@@ -53,6 +53,21 @@ export default (state = initialState, action) => {
                 cargando: false,
             }
 
+        case CREAR_ENLACE_EXITO:
+            return {
+                ...state,
+                url: action.payload,
+
+            }
+
+        case CREAR_ENLACE_ERROR:
+            return {
+                ...state,
+                mensaje_archivo: 'Hubo un error al crear el enlace',
+                cargando: false,
+                
+            }
+
         default:
             return state
     }
