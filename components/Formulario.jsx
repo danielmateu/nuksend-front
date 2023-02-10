@@ -7,11 +7,12 @@ export const Formulario = () => {
     //agregarPassword
     const agregarPassword = (e) => {
         console.log(e);
-        
     }
 
-    const agregarDescargas = (e) => {
-        console.log(e);
+    const [selectedOption, setSelectedOption] = useState('')
+
+    const handleChange = (e) => {
+        setSelectedOption(Number(e.target.value))
     }
 
     return (
@@ -19,11 +20,12 @@ export const Formulario = () => {
             <div className="">
                 <label htmlFor="" className='text-gray-600'>Eliminar tras:</label>
                 <select
-                    onChange={e => agregarDescargas(Number(e.target.value))}
+                    value={selectedOption}
+                    onChange={handleChange}
                     name=""
                     id=""
                     className='appereance-none w-full bg-white border border-gray-400 leading-none focus:outline-none p-2 shadow-lg rounded'>
-                    <option value="" selected disabled>--Selecciona--</option>
+                    <option value="" disabled>--Selecciona--</option>
                     <option value="1">1 descarga</option>
                     <option value="5">5 descargas</option>
                     <option value="10">10 descargas</option>
@@ -32,11 +34,13 @@ export const Formulario = () => {
             </div>
 
             <div className="mb-6">
-                <label htmlFor="" className='text-gray-600'>Contraseña </label>
-                <input
-                    type="checkbox"
-                    onChange={() => setPassword(!password)}
-                />
+                <div className="flex justify-between">
+                    <label htmlFor="" className='text-gray-600'>Contraseña </label>
+                    <input
+                        type="checkbox"
+                        onChange={() => setPassword(!password)}
+                    />
+                </div>
 
                 {
                     password ? (
