@@ -6,11 +6,11 @@ import { useContext } from "react"
 
 export const Alerta = () => {
 
-    //Extraer mensaje de error para usuario
+    //Extraer mensaje  para usuario
     const AuthContext = useContext(authContext)
     const { mensaje } = AuthContext
 
-    //Extraer mensaje de error para archivo 
+    //Extraer mensaje para archivo 
     const AppContext = useContext(appContext)
     const { mensaje_archivo } = AppContext
 

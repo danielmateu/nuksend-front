@@ -55,7 +55,7 @@ const AppState = ({ children }) => {
         // console.log('Subiendo archivo...');
         try {
             const resultado = await clienteAxios.post('/api/archivos', formData)
-            console.log(resultado.data);
+            // console.log(resultado.data);
 
             dispatch({
                 type: SUBIR_ARCHIVO_EXITO,
@@ -64,9 +64,16 @@ const AppState = ({ children }) => {
                     nombre_original: nombreArchivo
                 }
             })
+            
+            //Limpiar alerta despues de 3 segundos
+            setTimeout(() => {
+                dispatch({
+                    type: LIMPIAR_ALERTA
+                })
+            }, 3000)
 
             return;
-            
+
         } catch (error) {
             console.log(error);
             dispatch({
