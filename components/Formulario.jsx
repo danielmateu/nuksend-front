@@ -15,15 +15,15 @@ export const Formulario = () => {
     }
 
     return (
-        <div className='w-full '>
-            <div className="p-4">
+        <div className='w-full flex flex-col gap-4 '>
+            <div className="">
                 <label htmlFor="" className='text-gray-600'>Eliminar tras:</label>
                 <select
                     onChange={e => agregarDescargas(Number(e.target.value))}
                     name=""
                     id=""
-                    className='appereance-none w-full bg-whiteborder leading-none focus:outline-none p-2 shadow-lg'>
-                    <option value="" disabled>--Selecciona--</option>
+                    className='appereance-none w-full bg-white border border-gray-400 leading-none focus:outline-none p-2 shadow-lg rounded'>
+                    <option value="" selected disabled>--Selecciona--</option>
                     <option value="1">1 descarga</option>
                     <option value="5">5 descargas</option>
                     <option value="10">10 descargas</option>
@@ -31,7 +31,7 @@ export const Formulario = () => {
                 </select>
             </div>
 
-            <div className=" p-4">
+            <div className="mb-6">
                 <label htmlFor="" className='text-gray-600'>Contraseña </label>
                 <input
                     type="checkbox"
