@@ -26,7 +26,7 @@ export default (state = initialState, action) => {
                 ...state,
                 mensaje_archivo: null
             }
-        
+
         case SUBIR_ARCHIVO:
             return {
                 ...state,
@@ -38,7 +38,7 @@ export default (state = initialState, action) => {
                 ...state,
                 cargando: true,
             }
-        
+
         case SUBIR_ARCHIVO_EXITO:
             return {
                 ...state,
@@ -66,7 +66,7 @@ export default (state = initialState, action) => {
                 ...state,
                 mensaje_archivo: 'Hubo un error al crear el enlace',
                 cargando: false,
-                
+
             }
 
         case LIMPIAR_STATE:
@@ -80,7 +80,13 @@ export default (state = initialState, action) => {
                 password: '',
                 autor: null,
                 url: '',
-                
+
+            }
+
+        case AGREGAR_PASSWORD:
+            return {
+                ...state,
+                password: action.payload,
             }
 
         default:

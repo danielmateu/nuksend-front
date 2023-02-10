@@ -120,13 +120,22 @@ const AppState = ({ children }) => {
         })
     }
 
+    //Agregar password
+    const agregarPassword = password => {
+        dispatch({
+            type: AGREGAR_PASSWORD,
+            payload: password
+        })
+    }
+
     return (
         <appContext.Provider value={{
             ...state,
             mostrarAlerta,
             subirArchivo,
             crearEnlace,
-            limpiarState
+            limpiarState,
+            agregarPassword
         }}>
             {children}
         </appContext.Provider>

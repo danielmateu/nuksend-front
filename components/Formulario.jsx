@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
+import appContext from 'context/app/appContext';
+import React, { useContext, useState } from 'react'
 
 export const Formulario = () => {
 
-    const [password, setPassword] = useState(false)
+    //Context de la app
+    const AppContext = useContext(appContext);
+    const { agregarPassword } = AppContext;
 
-    //agregarPassword
-    const agregarPassword = (e) => {
-        console.log(e);
-    }
+    const [password, setPassword] = useState(false)
 
     const [selectedOption, setSelectedOption] = useState('')
 
