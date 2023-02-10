@@ -44,6 +44,7 @@ export default (state = initialState, action) => {
                 ...state,
                 usuario: action.payload,
                 autenticado: true,
+                mensaje: null,
 
             }
 
@@ -51,9 +52,12 @@ export default (state = initialState, action) => {
             localStorage.removeItem('token')
             return {
                 ...state,
+                usuario:null,
+                autenticado: null,
                 token: null,
                 usuario: null,
-                autenticado: null,
+                mensaje: null,
+                
 
             }
 

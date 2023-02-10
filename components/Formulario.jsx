@@ -6,13 +6,16 @@ export const Formulario = () => {
 
     //agregarPassword
     const agregarPassword = (e) => {
-        
         console.log(e);
         
     }
 
+    const agregarDescargas = (e) => {
+        console.log(e);
+    }
+
     return (
-        <div className='w-full my-4'>
+        <div className='w-full '>
             <div className="p-4">
                 <label htmlFor="" className='text-gray-600'>Eliminar tras:</label>
                 <select

@@ -22,7 +22,7 @@ const AuthState = ({ children }) => {
         token: typeof window !== 'undefined' ? localStorage.getItem('token') : '',
         autenticado: null,
         usuario: null,
-        mensaje: null
+        mensaje: null,
     };
 
     //Definir el reducer
@@ -95,12 +95,18 @@ const AuthState = ({ children }) => {
         try {
             const respuesta = await clienteAxios.get('/api/auth');
             // console.log(respuesta);
-            dispatch({
-                type: USUARIO_AUTENTICADO,
-                payload: respuesta.data.usuario
-            })
+            if(respuesta.data.usuario) {
+                dispatch({
+                    type: USUARIO_AUTENTICADO,
+                    payload: respuesta.data.usuario
+                })
+            }
         } catch (error) {
             console.log(error);
+            dispatch({
+                type: LOGIN_ERROR,
+                payload: error.response.data.msg
+            })
         }
     }
 
@@ -108,12 +114,10 @@ const AuthState = ({ children }) => {
     const cerrarSesion = () => {
         dispatch({
             type: CERRAR_SESION,
+            
         })
     }
-    //Obtener usuario autenticado
-
-
-
+    
 
     return (
         <authContext.Provider value={{

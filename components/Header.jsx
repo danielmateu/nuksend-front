@@ -1,23 +1,44 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import appContext from 'context/app/appContext';
 import authContext from 'context/auth/authContex';
 import Link from 'next/link'
-import { useContext } from 'react';
+import { useRouter } from 'next/router';
+import { useContext, useEffect } from 'react';
+
 
 export const Header = () => {
+
+    const router = useRouter();
 
     //Extraer el Usuario del Storage
     const AuthContext = useContext(authContext);
     const { usuario, usuarioAutenticado, cerrarSesion } = AuthContext;
 
+    //Context de la app
+    const AppContext = useContext(appContext);
+    const { limpiarState } = AppContext;
+
+    useEffect(() => {
+    usuarioAutenticado();
+    }, [])
+
+    const redireccionar = () => {
+        router.push('/')
+        limpiarState();
+    }
+    
+
 
     return (
         <header className='flex flex-col sm:flex-row items-center justify-between p-10 '>
-            <Link
-                href='/'
-                className='font-bold text-red-500  gap-1 text-2xl sm:text-4xl'
+            <a
+                // href='/'
+                onClick={() => redireccionar()}
+                className='font-bold text-red-500  gap-1 text-2xl sm:text-4xl cursor-pointer'
 
             >
                 NukSend <span className='text-gray-500 '>App</span>
-            </Link>
+            </a>
 
             {usuario ? (
 

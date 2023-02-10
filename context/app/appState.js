@@ -8,6 +8,7 @@ import {
     CREAR_ENLACE_ERROR,
     CREAR_ENLACE_EXITO,
     LIMPIAR_ALERTA,
+    LIMPIAR_STATE,
     MOSTRAR_ALERTA,
     SUBIR_ARCHIVO,
     SUBIR_ARCHIVO_ERROR,
@@ -111,12 +112,21 @@ const AppState = ({ children }) => {
         }
     }
 
+    //Limpiar state
+    const limpiarState = () => {
+        dispatch({
+            type: LIMPIAR_STATE,
+
+        })
+    }
+
     return (
         <appContext.Provider value={{
             ...state,
             mostrarAlerta,
             subirArchivo,
-            crearEnlace
+            crearEnlace,
+            limpiarState
         }}>
             {children}
         </appContext.Provider>

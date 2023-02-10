@@ -4,6 +4,7 @@ import {
     CREAR_ENLACE_ERROR,
     CREAR_ENLACE_EXITO,
     LIMPIAR_ALERTA,
+    LIMPIAR_STATE,
     MOSTRAR_ALERTA,
     SUBIR_ARCHIVO,
     SUBIR_ARCHIVO_ERROR,
@@ -65,6 +66,20 @@ export default (state = initialState, action) => {
                 ...state,
                 mensaje_archivo: 'Hubo un error al crear el enlace',
                 cargando: false,
+                
+            }
+
+        case LIMPIAR_STATE:
+            return {
+                ...state,
+                mensaje_archivo: null,
+                nombre: '',
+                nombre_original: '',
+                cargando: null,
+                descargas: 1,
+                password: '',
+                autor: null,
+                url: '',
                 
             }
 

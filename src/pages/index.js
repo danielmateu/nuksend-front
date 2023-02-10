@@ -22,7 +22,11 @@ export default function Home() {
   const { mensaje_archivo, url } = AppContext;
 
   useEffect(() => {
-    usuarioAutenticado()
+    const token = localStorage.getItem('token');
+
+    if(token){
+      usuarioAutenticado()
+    }
   }, [])
 
   //Copiar enlace
