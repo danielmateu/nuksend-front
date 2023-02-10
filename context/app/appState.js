@@ -128,6 +128,14 @@ const AppState = ({ children }) => {
         })
     }
 
+    //Agregar descargas
+    const agregarDescargas = descargas => {
+        dispatch({
+            type: AGREGAR_DESCARGAS,
+            payload: descargas
+        })
+    }
+
     return (
         <appContext.Provider value={{
             ...state,
@@ -135,7 +143,8 @@ const AppState = ({ children }) => {
             subirArchivo,
             crearEnlace,
             limpiarState,
-            agregarPassword
+            agregarPassword,
+            agregarDescargas
         }}>
             {children}
         </appContext.Provider>

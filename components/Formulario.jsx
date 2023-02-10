@@ -5,25 +5,22 @@ export const Formulario = () => {
 
     //Context de la app
     const AppContext = useContext(appContext);
-    const { agregarPassword } = AppContext;
+    const { agregarPassword, agregarDescargas } = AppContext;
 
     const [password, setPassword] = useState(false)
 
-    const [selectedOption, setSelectedOption] = useState('')
+    // const [selectedOption, setSelectedOption] = useState('')
 
-    const handleChange = (e) => {
-        setSelectedOption(Number(e.target.value))
-    }
+    // const handleDescargas = (e) => {
+    //     setSelectedOption(Number(e.target.value))
+    // }
 
     return (
         <div className='w-full flex flex-col gap-4 '>
             <div className="">
                 <label htmlFor="" className='text-gray-600'>Eliminar tras:</label>
                 <select
-                    value={selectedOption}
-                    onChange={handleChange}
-                    name=""
-                    id=""
+                    onChange={e => agregarDescargas(Number(e.target.value))}
                     className='appereance-none w-full bg-white border border-gray-400 leading-none focus:outline-none p-2 shadow-lg rounded'>
                     <option value="" disabled>--Selecciona--</option>
                     <option value="1">1 descarga</option>
