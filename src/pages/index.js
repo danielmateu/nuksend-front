@@ -39,7 +39,7 @@ export default function Home() {
               <p>{`${process.env.frontendURL}/enlaces/${url}`}</p>
 
               <button
-                className='bg-red-200 p-2 rounded hover:rounded-xl hover:bg-red-300 transition-colors text-black w-48 hover:w-60'
+                className='bg-red-200 p-2 rounded hover:rounded-xl hover:bg-red-300 transition-colors text-black w-48 hover:w-96'
                 onClick={() => navigator.clipboard.writeText(
                   `${process.env.frontendURL}/enlaces/${url}`
                 )}
