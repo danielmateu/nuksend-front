@@ -2,13 +2,14 @@
 import { Layout } from 'components/Layout'
 import { clienteAxios } from 'config/axios'
 import { useRouter } from 'next/router'
+import { useState } from 'react'
 
 
 export async function getServerSideProps({ params }) {
 
     const { enlace } = params
     const resultado = await clienteAxios.get(`/api/enlaces/${enlace}`);
-    console.log(resultado);
+    // console.log(resultado);
     return {
         props: {
             enlace: resultado.data,
@@ -28,21 +29,63 @@ export async function getServerSidePaths() {
     }
 }
 
-const Enlace = ({enlace}) => {
+const Enlace = ({ enlace }) => {
 
     const router = useRouter()
+    const [tienePassword, setTienePassword] = useState(enlace.password)
+
+    console.log(tienePassword);
     // const { enlace } = router.query
+
+    const verificarPassword = async e => {
+        e.preventDefault()
+        console.log('verificando password');
+    }
 
     return (
         <Layout>
-            <h1 className="text-4xl text-center text-gray-700">Descarga tu archivo</h1>
+            {
+                tienePassword ? (
+                    <>
+                        <p className='text-center'>Este enlace está protegido por un Password, para descargar el archivo, introduce el password correcto </p>
+                        <div className="container mx-auto">
+                            <form
+                                className="bg-white rounded hover:shadow-lg p-10 m-6 transition-all"
+                            onSubmit={verificarPassword}
+                            >
+                                <div className="mb-4 flex flex-col">
+                                    <label htmlFor="password">Password</label>
+                                    <input
+                                        type="password"
+                                        className="p-4 bg-slate-100 rounded appearance-none focus:outline-none"
+                                        placeholder='Introduce tu password'
+                                        id='password'
+                                        
+                                    />
+                                    
+                                </div>
+                                <input
+                                type="submit"
+                                value='Validar Password'
+                                className='w-full bg-green-200 hover:bg-green-300 transition-colors py-4 rounded my-2'
+                            />
+                            </form>
+                        </div>
+                    </>
+                ) : (
+                    <>
+                        <h1 className="text-4xl text-center text-gray-700">Descarga tu archivo</h1>
 
-            <div className="flex items-center justify-center mt-10">
-                <a
-                    download
-                    href={`${process.env.backendURL}/api/archivos/${enlace.archivo}`}
-                    className="bg-red-500 text-center px-10 py-2 rounded text-white cursor-pointer hover:bg-gray-900 transition-all">Aquí</a>
-            </div>
+                        <div className="flex items-center justify-center mt-10">
+                            <a
+                                download
+                                href={`${process.env.backendURL}/api/archivos/${enlace.archivo}`}
+                                className="bg-red-500 text-center px-10 py-2 rounded text-white cursor-pointer hover:bg-gray-900 transition-all">Aquí</a>
+                        </div>
+                    </>
+                )
+            }
+
         </Layout>
     )
 }

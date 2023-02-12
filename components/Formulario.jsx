@@ -9,12 +9,6 @@ export const Formulario = () => {
 
     const [password, setPassword] = useState(false)
 
-    // const [selectedOption, setSelectedOption] = useState('')
-
-    // const handleDescargas = (e) => {
-    //     setSelectedOption(Number(e.target.value))
-    // }
-
     return (
         <div className='w-full flex flex-col gap-4 '>
             <div className="">

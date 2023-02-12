@@ -53,7 +53,7 @@ export default function Home() {
             </div>
           ) : (
             <>
-              {mensaje_archivo && <Alerta />}
+              
               <div className="lg:flex hover:shadow-lg p-4 bg-white rounded-lg py-10 transition-all">
                 <DropZone />
                 <div className="md:flex-1 m-4 lg:mt-0">
@@ -65,6 +65,7 @@ export default function Home() {
                   </Link>
                 </div>
               </div>
+              {mensaje_archivo && <Alerta />}
             </>
           )
           }
