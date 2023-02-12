@@ -33,13 +33,29 @@ const Enlace = ({ enlace }) => {
 
     const router = useRouter()
     const [tienePassword, setTienePassword] = useState(enlace.password)
+    const [password, setPassword] = useState('')
 
     console.log(tienePassword);
+
+    console.log(enlace);
     // const { enlace } = router.query
 
     const verificarPassword = async e => {
         e.preventDefault()
-        console.log('verificando password');
+        // console.log('verificando password');
+        const data = {
+            password
+        }
+
+        try {
+            const resultado = await clienteAxios.post(`/api/enlaces/${enlace.enlace}`, data);
+            console.log(resultado);
+
+            setTienePassword(resultado.data.password)
+        } catch (error) {
+            console.log(error.response.data.msg);
+        }
+
     }
 
     return (
@@ -48,10 +64,10 @@ const Enlace = ({ enlace }) => {
                 tienePassword ? (
                     <>
                         <p className='text-center'>Este enlace está protegido por un Password, para descargar el archivo, introduce el password correcto </p>
-                        <div className="container mx-auto">
+                        <div className=" w-full md:w-8/12 mx-auto">
                             <form
                                 className="bg-white rounded hover:shadow-lg p-10 m-6 transition-all"
-                            onSubmit={verificarPassword}
+                                onSubmit={verificarPassword}
                             >
                                 <div className="mb-4 flex flex-col">
                                     <label htmlFor="password">Password</label>
@@ -60,15 +76,16 @@ const Enlace = ({ enlace }) => {
                                         className="p-4 bg-slate-100 rounded appearance-none focus:outline-none"
                                         placeholder='Introduce tu password'
                                         id='password'
-                                        
+                                        value={password}
+                                        onChange={e => setPassword(e.target.value)}
                                     />
-                                    
+
                                 </div>
                                 <input
-                                type="submit"
-                                value='Validar Password'
-                                className='w-full bg-green-200 hover:bg-green-300 transition-colors py-4 rounded my-2'
-                            />
+                                    type="submit"
+                                    value='Validar Password'
+                                    className='w-full bg-green-200 hover:bg-green-300 transition-colors py-4 rounded my-2'
+                                />
                             </form>
                         </div>
                     </>
