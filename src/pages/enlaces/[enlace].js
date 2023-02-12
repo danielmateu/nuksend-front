@@ -1,8 +1,12 @@
 
+import { Alerta } from 'components/Alerta'
 import { Layout } from 'components/Layout'
 import { clienteAxios } from 'config/axios'
+import appContext from 'context/app/appContext'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+
+
 
 
 export async function getServerSideProps({ params }) {
@@ -31,6 +35,9 @@ export async function getServerSidePaths() {
 
 const Enlace = ({ enlace }) => {
 
+    const AppContext = useContext(appContext)
+    const {mostrarAlerta, mensaje_archivo} = AppContext
+
     const router = useRouter()
     const [tienePassword, setTienePassword] = useState(enlace.password)
     const [password, setPassword] = useState('')
@@ -54,6 +61,7 @@ const Enlace = ({ enlace }) => {
             setTienePassword(resultado.data.password)
         } catch (error) {
             console.log(error.response.data.msg);
+            mostrarAlerta(error.response.data.msg);
         }
 
     }
@@ -86,6 +94,8 @@ const Enlace = ({ enlace }) => {
                                     value='Validar Password'
                                     className='w-full bg-green-200 hover:bg-green-300 transition-colors py-4 rounded my-2'
                                 />
+
+                                {mensaje_archivo && <Alerta />}
                             </form>
                         </div>
                     </>
