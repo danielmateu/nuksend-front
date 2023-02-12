@@ -2,8 +2,8 @@
 const nextConfig = {
   reactStrictMode: true,
   env: {
-    backendURL  : 'https://nuk-send-node.herokuapp.com/',
-    frontendURL :'https://nuksend-front.vercel.app/'
+    backendURL  : 'https://nuk-send-node.herokuapp.com',
+    frontendURL :'https://nuksend-front.vercel.app'
   }
 }
 
