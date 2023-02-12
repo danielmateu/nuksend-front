@@ -1,6 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-
-import { Inter } from '@next/font/google'
 import { Alerta } from 'components/Alerta'
 import { DropZone } from 'components/DropZone'
 import { Layout } from 'components/Layout'
@@ -29,8 +27,6 @@ export default function Home() {
     }
   }, [])
 
-  //Copiar enlace
-  
 
 
   return (
